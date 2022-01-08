@@ -1,7 +1,7 @@
 package com.zalora.UrlShortner.controller;
 
 
-import com.zalora.UrlShortner.entity.Redirect;
+import com.zalora.UrlShortner.entity.URLEntity;
 import com.zalora.UrlShortner.request.RedirectCreationRequest;
 import com.zalora.UrlShortner.service.RedirectService;
 
@@ -30,7 +30,7 @@ public class RedirectController {
     @GetMapping("/{alias}")
     public ResponseEntity<?> handleRedirect(@PathVariable String alias) throws URISyntaxException
     {
-        Redirect redirect = redirectService.getRedirect(alias);
+        URLEntity redirect = redirectService.getRedirect(alias);
         System.out.println("Redirecting URI " + redirect);
         URI uri = new URI(redirect.getUrl());
         HttpHeaders httpHeaders = new HttpHeaders();

@@ -8,7 +8,7 @@ import javax.persistence.*;
 
 
 @Entity
-public class Redirect {
+public class URLEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,12 +24,12 @@ public class Redirect {
     private String url;
 
 
-    public Redirect()
+    public URLEntity()
     {
 
     }
 
-    public Redirect(final String alias,final String url)
+    public URLEntity(final String alias, final String url)
     {
         this.alias=alias;
         this.url=url;

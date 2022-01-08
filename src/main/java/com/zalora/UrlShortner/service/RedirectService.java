@@ -1,6 +1,6 @@
 package com.zalora.UrlShortner.service;
 
-import com.zalora.UrlShortner.entity.Redirect;
+import com.zalora.UrlShortner.entity.URLEntity;
 import com.zalora.UrlShortner.exception.NotfoundException;
 import com.zalora.UrlShortner.exception.RquestUnknownException;
 import com.zalora.UrlShortner.repository.RedirectRepository;
@@ -22,22 +22,22 @@ public class RedirectService {
         this.redirectRepository = redirectRepository;
     }
 
-    public Optional<Redirect> createRedirect(RedirectCreationRequest redirectCreationRequest)
+    public Optional<URLEntity> createRedirect(RedirectCreationRequest redirectCreationRequest)
     {
         if(redirectRepository.existsByAlias(redirectCreationRequest.getAlias()))
         {
             throw new ResponseStatusException(HttpStatus.ALREADY_REPORTED,"Alias already reported int the server",new RquestUnknownException());
         }
         System.out.println("Redirect Request " + redirectCreationRequest.toString());
-        Redirect redirect = redirectRepository.save(new Redirect(redirectCreationRequest.getAlias(),redirectCreationRequest.getUrl()));
-        Redirect publishUrl = redirectRepository.save(redirect);
+        URLEntity redirect = redirectRepository.save(new URLEntity(redirectCreationRequest.getAlias(),redirectCreationRequest.getUrl()));
+        URLEntity publishUrl = redirectRepository.save(redirect);
         System.out.println("Redirect " + publishUrl);
         return Optional.ofNullable(publishUrl);
     }
 
-    public Redirect getRedirect(String alias)
+    public URLEntity getRedirect(String alias)
     {
-        Redirect redirect = redirectRepository.findByAlias(alias).orElseThrow(()
+        URLEntity redirect = redirectRepository.findByAlias(alias).orElseThrow(()
                 -> new NotfoundException(" Alias not Found, Please create a new one"));
         return redirect;
 
