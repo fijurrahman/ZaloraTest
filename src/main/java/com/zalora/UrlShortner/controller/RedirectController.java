@@ -27,6 +27,7 @@ public class RedirectController {
         this.redirectService = redirectService;
     }
 
+
     @GetMapping("/{alias}")
     public ResponseEntity<?> handleRedirect(@PathVariable String alias) throws URISyntaxException
     {
