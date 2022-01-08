@@ -24,12 +24,19 @@ public class RedirectService {
 
     public Optional<URLEntity> createRedirect(RedirectCreationRequest redirectCreationRequest)
     {
+        String randomchars= getRandomChars();
         if(redirectRepository.existsByAlias(redirectCreationRequest.getAlias()))
         {
             throw new ResponseStatusException(HttpStatus.ALREADY_REPORTED,"Alias already reported int the server",new RquestUnknownException());
         }
+        if(redirectRepository.existsByURL(redirectCreationRequest.getUrl()))
+        {
+            URLEntity redirect = redirectRepository.save(new URLEntity(redirectCreationRequest.getAlias(),redirectCreationRequest.getUrl()));
+            URLEntity publishUrl = redirectRepository.save(redirect);
+            return Optional.ofNullable(publishUrl);
+        }
         System.out.println("Redirect Request " + redirectCreationRequest.toString());
-        URLEntity redirect = redirectRepository.save(new URLEntity(redirectCreationRequest.getAlias(),redirectCreationRequest.getUrl()));
+        URLEntity redirect = redirectRepository.save(new URLEntity(redirectCreationRequest.getAlias()  + randomchars,redirectCreationRequest.getUrl()));
         URLEntity publishUrl = redirectRepository.save(redirect);
         System.out.println("Redirect " + publishUrl);
         return Optional.ofNullable(publishUrl);
@@ -41,5 +48,15 @@ public class RedirectService {
                 -> new NotfoundException(" Alias not Found, Please create a new one"));
         return redirect;
 
+    }
+
+    private String getRandomChars(){
+        String randomStr = "";
+        String randChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+        for(int i = 0; i<10; i++)
+        {
+            randomStr += randChars.charAt((int) Math.floor(Math.random() * randChars.length()));
+        }
+        return randomStr;
     }
 }
