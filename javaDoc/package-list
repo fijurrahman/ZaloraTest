@@ -1,7 +1,0 @@
-com.zalora.UrlShortner
-com.zalora.UrlShortner.controller
-com.zalora.UrlShortner.entity
-com.zalora.UrlShortner.exception
-com.zalora.UrlShortner.repository
-com.zalora.UrlShortner.request
-com.zalora.UrlShortner.service
