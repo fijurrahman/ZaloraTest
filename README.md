@@ -17,10 +17,20 @@ output
 
 {"alias":"zal1QIBEnD6U2","url":"https://www.zalora.com.my"}
 
+curl --location --request POST 'http://localhost:8080/' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "alias":"gcp",
+    "url" :"https://cloud.google.com/pubsub#section-7"
+}'
+
+{"alias":"gcpoA950H8","url":"https://cloud.google.com/pubsub#section-7"}
+
 
 Step 3 -> After Sucessfull post you will get the alias name
 
 http://localhost:8080/zal1QIBEnD6U2
+http://localhost:8080/gcpoA950H8
 
 
 Step 4-> Request Will be stored in the in memory db
@@ -33,7 +43,10 @@ pwd:
 
 select * from URLEntity
 
-![image](https://user-images.githubusercontent.com/29682980/148654837-3de6a1aa-72d2-482a-b24e-fb519607dc2f.png)
+![image](https://user-images.githubusercontent.com/29682980/148688648-c7adddf2-4a4a-414f-ad05-11f707433784.png)
+
+
+
 
 
 
