@@ -43,7 +43,8 @@ pwd:
 
 select * from URLtbl
 
-![image](https://user-images.githubusercontent.com/29682980/148688648-c7adddf2-4a4a-414f-ad05-11f707433784.png)
+![image](https://user-images.githubusercontent.com/29682980/148693478-91896db3-ff96-4cb2-ba1a-c3c8aa55b447.png)
+
 
 
 
