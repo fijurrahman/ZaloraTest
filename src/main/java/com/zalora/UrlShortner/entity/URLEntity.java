@@ -20,6 +20,7 @@ public class URLEntity {
     @Column(unique = true , nullable = true)
     private String alias;
 
+
     @Column(nullable = false)
     private String url;
 

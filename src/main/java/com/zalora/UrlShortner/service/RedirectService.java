@@ -6,6 +6,8 @@ import com.zalora.UrlShortner.exception.RquestUnknownException;
 import com.zalora.UrlShortner.repository.RedirectRepository;
 import com.zalora.UrlShortner.request.RedirectCreationRequest;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -15,6 +17,8 @@ import java.util.Optional;
 
 @Service
 public class RedirectService {
+    Logger logger = LoggerFactory.getLogger(RedirectService.class);
+
     private RedirectRepository redirectRepository;
 
     @Autowired
@@ -29,16 +33,10 @@ public class RedirectService {
         {
             throw new ResponseStatusException(HttpStatus.ALREADY_REPORTED,"Alias already reported int the server",new RquestUnknownException());
         }
-        if(redirectRepository.existsByURL(redirectCreationRequest.getUrl()))
-        {
-            URLEntity redirect = redirectRepository.save(new URLEntity(redirectCreationRequest.getAlias(),redirectCreationRequest.getUrl()));
-            URLEntity publishUrl = redirectRepository.save(redirect);
-            return Optional.ofNullable(publishUrl);
-        }
-        System.out.println("Redirect Request " + redirectCreationRequest.toString());
+        logger.info("Redirect Request " + redirectCreationRequest.toString());
         URLEntity redirect = redirectRepository.save(new URLEntity(redirectCreationRequest.getAlias()  + randomchars,redirectCreationRequest.getUrl()));
         URLEntity publishUrl = redirectRepository.save(redirect);
-        System.out.println("Redirect " + publishUrl);
+        logger.info("Redirect " + publishUrl);
         return Optional.ofNullable(publishUrl);
     }
 

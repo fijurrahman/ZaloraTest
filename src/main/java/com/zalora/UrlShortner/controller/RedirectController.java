@@ -5,6 +5,8 @@ import com.zalora.UrlShortner.entity.URLEntity;
 import com.zalora.UrlShortner.request.RedirectCreationRequest;
 import com.zalora.UrlShortner.service.RedirectService;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 
@@ -20,7 +22,7 @@ import static org.springframework.http.HttpStatus.MOVED_PERMANENTLY;
 
 @RestController
 public class RedirectController {
-
+    Logger logger = LoggerFactory.getLogger(RedirectController.class);
     private RedirectService redirectService;
     @Autowired
     public RedirectController(RedirectService redirectService) {
@@ -31,7 +33,7 @@ public class RedirectController {
     public ResponseEntity<?> handleRedirect(@PathVariable String alias) throws URISyntaxException
     {
         URLEntity redirect = redirectService.getRedirect(alias);
-        System.out.println("Redirecting URI " + redirect);
+        logger.info("Redirecting URI " + redirect);
         URI uri = new URI(redirect.getUrl());
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.setLocation(uri);
