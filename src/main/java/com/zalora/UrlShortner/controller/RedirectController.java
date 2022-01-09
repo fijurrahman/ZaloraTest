@@ -1,7 +1,7 @@
 package com.zalora.UrlShortner.controller;
 
 
-import com.zalora.UrlShortner.entity.URLEntity;
+import com.zalora.UrlShortner.entity.URLtbl;
 import com.zalora.UrlShortner.request.RedirectCreationRequest;
 import com.zalora.UrlShortner.service.RedirectURLService;
 
@@ -9,7 +9,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
-
 
 
 import org.springframework.http.ResponseEntity;
@@ -20,6 +19,12 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import static org.springframework.http.HttpStatus.MOVED_PERMANENTLY;
 
+
+/**
+ *
+ * This Controller class will be used to Redirect the Request from alias string
+ */
+
 @RestController
 public class RedirectController {
     Logger logger = LoggerFactory.getLogger(RedirectController.class);
@@ -29,10 +34,14 @@ public class RedirectController {
         this.redirectService = redirectService;
     }
 
+    public RedirectController() {
+
+    }
+
     @GetMapping("/{alias}")
     public ResponseEntity<?> handleRedirect(@PathVariable String alias) throws URISyntaxException
     {
-        URLEntity redirect = redirectService.getRedirect(alias);
+        URLtbl redirect = redirectService.getRedirect(alias);
         logger.info("Redirecting URI " + redirect);
         URI uri = new URI(redirect.getUrl());
         HttpHeaders httpHeaders = new HttpHeaders();

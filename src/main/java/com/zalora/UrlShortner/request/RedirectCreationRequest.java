@@ -1,11 +1,15 @@
 package com.zalora.UrlShortner.request;
 
 import javax.validation.constraints.NotNull;
-import java.time.LocalDateTime;
-import java.util.Date;
+
+
+/**
+ * RedirectCreationRequest class is used to create a redirect request
+ * String alias
+ * String url
+ * */
 
 public class RedirectCreationRequest {
-
 
     @NotNull
     private String alias;

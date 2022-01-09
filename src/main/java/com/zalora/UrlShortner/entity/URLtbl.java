@@ -6,13 +6,16 @@ import org.hibernate.annotations.NaturalId;
 
 import javax.persistence.*;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.Date;
 
 
+/**
+ * In Memory table used to Presist the data in the memory for fast access.
+ * Todo -> We may use NoSQL to Load the url for better performance read operations.
+ */
+
 @Entity
-public class URLEntity {
+public class URLtbl {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -37,12 +40,12 @@ public class URLEntity {
         createDate = new Date();
     }
 
-    public URLEntity()
+    public URLtbl()
     {
 
     }
 
-    public URLEntity(final String alias, final String url) {
+    public URLtbl(final String alias, final String url) {
         this.alias = alias;
         this.url = url;
     }
