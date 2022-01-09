@@ -3,7 +3,7 @@ package com.zalora.UrlShortner.controller;
 
 import com.zalora.UrlShortner.entity.URLEntity;
 import com.zalora.UrlShortner.request.RedirectCreationRequest;
-import com.zalora.UrlShortner.service.RedirectService;
+import com.zalora.UrlShortner.service.RedirectURLService;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,9 +23,9 @@ import static org.springframework.http.HttpStatus.MOVED_PERMANENTLY;
 @RestController
 public class RedirectController {
     Logger logger = LoggerFactory.getLogger(RedirectController.class);
-    private RedirectService redirectService;
+    private RedirectURLService redirectService;
     @Autowired
-    public RedirectController(RedirectService redirectService) {
+    public RedirectController(RedirectURLService redirectService) {
         this.redirectService = redirectService;
     }
 
