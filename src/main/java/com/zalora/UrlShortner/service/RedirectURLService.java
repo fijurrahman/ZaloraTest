@@ -15,6 +15,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import java.util.Optional;
 
+
 @Service
 public class RedirectURLService {
     Logger logger = LoggerFactory.getLogger(RedirectURLService.class);
@@ -34,7 +35,9 @@ public class RedirectURLService {
             throw new ResponseStatusException(HttpStatus.ALREADY_REPORTED,"Alias already reported int the server",new RquestUnknownException());
         }
         logger.info("Redirect Request " + redirectCreationRequest.toString());
-        URLEntity redirect = redirectRepository.save(new URLEntity(redirectCreationRequest.getAlias()  + randomchars,redirectCreationRequest.getUrl()));
+
+        URLEntity redirect = redirectRepository.save(new URLEntity(redirectCreationRequest.getAlias()  + randomchars,redirectCreationRequest.getUrl()
+               ));
         URLEntity publishUrl = redirectRepository.save(redirect);
         logger.info("Redirect " + publishUrl);
         return Optional.ofNullable(publishUrl);
@@ -43,7 +46,7 @@ public class RedirectURLService {
     public URLEntity getRedirect(String alias)
     {
         URLEntity redirect = redirectRepository.findByAlias(alias).orElseThrow(()
-                -> new NotfoundException(" Alias not Found, Please create a new one"));
+                ->  new ResponseStatusException(HttpStatus.NOT_ACCEPTABLE , "Alias Name is not Found",new NotfoundException()));
         return redirect;
 
     }

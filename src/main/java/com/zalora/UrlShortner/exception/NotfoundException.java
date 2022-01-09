@@ -14,4 +14,6 @@ public class NotfoundException extends RuntimeException{
     {
         super(msg,cs);
     }
+
+    public NotfoundException() {}
 }

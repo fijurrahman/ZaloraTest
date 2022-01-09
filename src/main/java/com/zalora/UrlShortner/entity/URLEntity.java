@@ -6,6 +6,10 @@ import org.hibernate.annotations.NaturalId;
 
 import javax.persistence.*;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.Date;
+
 
 @Entity
 public class URLEntity {
@@ -24,19 +28,26 @@ public class URLEntity {
     @Column(nullable = false)
     private String url;
 
+    @Column(name = "creationTime",updatable = false )
+    private Date createDate ;
+
+    @PrePersist
+    public void onCreate()
+    {
+        createDate = new Date();
+    }
 
     public URLEntity()
     {
 
     }
 
-    public URLEntity(final String alias, final String url)
-    {
-        this.alias=alias;
-        this.url=url;
+    public URLEntity(final String alias, final String url) {
+        this.alias = alias;
+        this.url = url;
     }
 
-    public Long getId() {
+   public Long getId() {
         return id;
     }
 

@@ -1,6 +1,8 @@
 package com.zalora.UrlShortner.request;
 
 import javax.validation.constraints.NotNull;
+import java.time.LocalDateTime;
+import java.util.Date;
 
 public class RedirectCreationRequest {
 
@@ -10,10 +12,12 @@ public class RedirectCreationRequest {
     @NotNull
     private String url;
 
+
     public RedirectCreationRequest(final String alias, final String url) {
         this.alias = alias;
         this.url = url;
     }
+
 
     public String getAlias() {
         return alias;
